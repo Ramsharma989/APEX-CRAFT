@@ -15,8 +15,8 @@ Each project features a dedicated, fully interactive demo:
 
 ## 🚀 Live Demo on GitHub Pages
 
-This site is deployed live via GitHub Pages.
-- **Main Website**: `https://<your-username>.github.io/<your-repo>/`
+This site is deployed live via GitHub Pages:
+- **Live Website**: [https://Ramsharma989.github.io/APEX-CRAFT/](https://Ramsharma989.github.io/APEX-CRAFT/)
 
 ## 🛠️ Built With
 
