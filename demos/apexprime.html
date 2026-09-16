@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexPrime Luxury Realty | Ultra-Prime Global Architectural Residences</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #111215;
+      --bg-card: #191b20;
+      --bronze: #e59866;
+      --bronze-light: #f8c471;
+      --text: #f5f6f8;
+      --text-muted: #8c909a;
+      --border: rgba(255, 255, 255, 0.1);
+      --font-title: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); line-height: 1.5; }
+
+    header { background: rgba(17, 18, 21, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-wrap { max-width: 1240px; margin: 0 auto; padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-title); font-size: 1.4rem; font-weight: 800; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; letter-spacing: -0.01em; }
+    .logo-badge { width: 34px; height: 34px; background: linear-gradient(135deg, var(--bronze), #d35400); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .logo span { color: var(--bronze); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
+    .nav-links a:hover { color: white; }
+    .btn-vip { background: var(--bronze); color: #111; padding: 0.6rem 1.25rem; font-weight: 700; font-size: 0.85rem; border-radius: 6px; text-decoration: none; transition: all 0.2s; }
+    .btn-vip:hover { background: var(--bronze-light); }
+
+    /* Hero */
+    .hero { max-width: 1240px; margin: 0 auto; padding: 4rem 2rem 2.5rem; text-align: center; }
+    .hero-pill { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(229, 152, 102, 0.15); border: 1px solid rgba(229, 152, 102, 0.3); color: var(--bronze-light); padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; margin-bottom: 1.25rem; }
+    .hero h1 { font-family: var(--font-title); font-size: 3.5rem; font-weight: 800; line-height: 1.15; margin-bottom: 1.25rem; }
+    .hero h1 span { color: var(--bronze); }
+    .hero p { color: var(--text-muted); font-size: 1.15rem; max-width: 600px; margin: 0 auto 2.5rem; }
+
+    /* Filter Bar */
+    .filter-bar { display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .filter-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted); padding: 0.6rem 1.4rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .filter-btn.active { background: var(--bronze); color: #111; border-color: var(--bronze); }
+
+    /* Property Cards */
+    .prop-grid { max-width: 1240px; margin: 0 auto 4rem; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+    .prop-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; }
+    .prop-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); border-color: rgba(229, 152, 102, 0.4); }
+    .prop-img-box { height: 220px; background: linear-gradient(135deg, #2b2622, #18191d); display: flex; align-items: center; justify-content: center; position: relative; }
+    .prop-badge { position: absolute; top: 1rem; left: 1rem; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); padding: 0.35rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; color: var(--bronze); border: 1px solid var(--border); }
+    .prop-body { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
+    .prop-price { font-family: var(--font-title); font-size: 1.6rem; font-weight: 800; color: white; margin-bottom: 0.3rem; }
+    .prop-name { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .prop-location { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.3rem; }
+    .prop-specs { display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 1rem; margin-top: auto; font-size: 0.85rem; color: var(--text-muted); }
+    .btn-tour { margin-top: 1rem; width: 100%; background: #262932; border: 1px solid var(--border); color: white; padding: 0.65rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+    .btn-tour:hover { background: var(--bronze); color: #111; }
+
+    /* Mortgage Calculator */
+    .calc-section { max-width: 900px; margin: 0 auto 5rem; padding: 2.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; }
+    .calc-title { font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem; text-align: center; }
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+    .form-row { margin-bottom: 1.25rem; }
+    .form-row label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.35rem; }
+    .form-control { width: 100%; background: #111215; border: 1px solid var(--border); color: white; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.95rem; }
+    .calc-result-box { background: #111215; border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; text-align: center; }
+    .calc-res-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .calc-res-val { font-family: var(--font-title); font-size: 2.4rem; font-weight: 800; color: var(--bronze); margin-bottom: 0.5rem; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.4rem; }
+      .calc-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-wrap">
+      <a href="#" class="logo">
+        <div class="logo-badge">🏛️</div>
+        <div>Apex<span>Prime</span> Realty</div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Beverly Hills</a></li>
+        <li><a href="#">Manhattan Sky</a></li>
+        <li><a href="#">Miami Waterfront</a></li>
+        <li><a href="#">Off-Market Vault</a></li>
+        <li><a href="#">Private Office</a></li>
+      </ul>
+      <a href="#calc" class="btn-vip">Schedule Private Tour</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-pill">🏰 Curated Ultra-Luxury Real Estate</div>
+    <h1>Architectural Masterpieces.<br><span>Iconic Addresses.</span></h1>
+    <p>Representing premier high-net-worth acquisitions across the world's most sought-after postcodes.</p>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-loc="all">All Prime Estates</button>
+      <button class="filter-btn" data-loc="beverly">Beverly Hills</button>
+      <button class="filter-btn" data-loc="manhattan">Manhattan</button>
+      <button class="filter-btn" data-loc="miami">Miami Waterfront</button>
+    </div>
+  </section>
+
+  <!-- Estates Showcase -->
+  <div class="prop-grid" id="estate-grid">
+    <div class="prop-card" data-loc="beverly">
+      <div class="prop-img-box">
+        <span class="prop-badge">Beverly Hills Estate</span>
+        <span style="font-size: 4rem;">🏡</span>
+      </div>
+      <div class="prop-body">
+        <div class="prop-price">$14,850,000</div>
+        <div class="prop-name">Villa Bella Vista</div>
+        <div class="prop-location">📍 Trousdale Estates, Beverly Hills, CA</div>
+        <div class="prop-specs">
+          <span>🛏 6 Beds</span>
+          <span>🛁 8 Baths</span>
+          <span>📐 9,400 Sq Ft</span>
+        </div>
+        <button class="btn-tour" onclick="alert('ApexPrime: VIP Private Showing request sent to listing director.')">Book Private Showing</button>
+      </div>
+    </div>
+
+    <div class="prop-card" data-loc="manhattan">
+      <div class="prop-img-box">
+        <span class="prop-badge">Penthouse Reserve</span>
+        <span style="font-size: 4rem;">🏙️</span>
+      </div>
+      <div class="prop-body">
+        <div class="prop-price">$22,500,000</div>
+        <div class="prop-name">The Madison Sky Manor</div>
+        <div class="prop-location">📍 200 Madison Ave, Upper East Side, NY</div>
+        <div class="prop-specs">
+          <span>🛏 5 Beds</span>
+          <span>🛁 6 Baths</span>
+          <span>📐 7,200 Sq Ft</span>
+        </div>
+        <button class="btn-tour" onclick="alert('ApexPrime: VIP Private Showing request sent to listing director.')">Book Private Showing</button>
+      </div>
+    </div>
+
+    <div class="prop-card" data-loc="miami">
+      <div class="prop-img-box">
+        <span class="prop-badge">Waterfront Dock</span>
+        <span style="font-size: 4rem;">🌴</span>
+      </div>
+      <div class="prop-body">
+        <div class="prop-price">$11,200,000</div>
+        <div class="prop-name">Biscayne Modern Oasis</div>
+        <div class="prop-location">📍 Venetians Islands, Miami Beach, FL</div>
+        <div class="prop-specs">
+          <span>🛏 5 Beds</span>
+          <span>🛁 6.5 Baths</span>
+          <span>📐 8,100 Sq Ft</span>
+        </div>
+        <button class="btn-tour" onclick="alert('ApexPrime: VIP Private Showing request sent to listing director.')">Book Private Showing</button>
+      </div>
+    </div>
+
+    <div class="prop-card" data-loc="beverly">
+      <div class="prop-img-box">
+        <span class="prop-badge">Architectural Modern</span>
+        <span style="font-size: 4rem;">⛰️</span>
+      </div>
+      <div class="prop-body">
+        <div class="prop-price">$18,750,000</div>
+        <div class="prop-name">The Bel Air Glass Pavilion</div>
+        <div class="prop-location">📍 Bellagio Rd, Bel Air, Los Angeles, CA</div>
+        <div class="prop-specs">
+          <span>🛏 7 Beds</span>
+          <span>🛁 9 Baths</span>
+          <span>📐 11,200 Sq Ft</span>
+        </div>
+        <button class="btn-tour" onclick="alert('ApexPrime: VIP Private Showing request sent to listing director.')">Book Private Showing</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Mortgage Estimation -->
+  <section class="calc-section" id="calc">
+    <div class="calc-title">Private Wealth Mortgage & Financing Estimator</div>
+    <div class="calc-grid">
+      <div>
+        <div class="form-row">
+          <label>Property Price ($)</label>
+          <input type="number" id="prop-price-input" class="form-control" value="14850000" step="50000">
+        </div>
+        <div class="form-row">
+          <label>Down Payment (%)</label>
+          <input type="number" id="down-input" class="form-control" value="25" min="10" max="80">
+        </div>
+        <div class="form-row">
+          <label>Interest Rate (%)</label>
+          <input type="number" id="rate-input" class="form-control" value="5.8" step="0.1">
+        </div>
+      </div>
+      <div class="calc-result-box">
+        <div class="calc-res-label">Estimated Monthly Principal & Interest</div>
+        <div class="calc-res-val" id="monthly-out">$65,210</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">Jumbo Private Banking Tier (30-Year Fixed)</div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Filter handling
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.prop-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const loc = btn.getAttribute('data-loc');
+
+        cards.forEach(card => {
+          if (loc === 'all' || card.getAttribute('data-loc') === loc) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Mortgage calculator
+    function calcMortgage() {
+      const price = parseFloat(document.getElementById('prop-price-input').value) || 10000000;
+      const downPct = (parseFloat(document.getElementById('down-input').value) || 20) / 100;
+      const annualRate = (parseFloat(document.getElementById('rate-input').value) || 5.5) / 100;
+
+      const loan = price * (1 - downPct);
+      const monthlyRate = annualRate / 12;
+      const n = 360; // 30 years
+
+      const monthly = loan * (monthlyRate * Math.pow(1 + monthlyRate, n)) / (Math.pow(1 + monthlyRate, n) - 1);
+      document.getElementById('monthly-out').textContent = `$${Math.round(monthly).toLocaleString()}`;
+    }
+
+    ['prop-price-input', 'down-input', 'rate-input'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calcMortgage);
+    });
+  </script>
+</body>
+</html>

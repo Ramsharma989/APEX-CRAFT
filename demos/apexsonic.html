@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexSonic Precision Audio | Audiophile Master Reference Acoustics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07080a;
+      --bg-card: #0f1117;
+      --cyan: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.35);
+      --violet: #8b5cf6;
+      --text: #f1f5f9;
+      --text-muted: #64748b;
+      --border: rgba(255, 255, 255, 0.08);
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.5; overflow-x: hidden; }
+
+    header { border-bottom: 1px solid var(--border); background: rgba(7, 8, 10, 0.95); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
+    .nav-wrap { max-width: 1200px; margin: 0 auto; padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; letter-spacing: -0.02em; }
+    .logo-wave { color: var(--cyan); }
+    .logo span { color: var(--cyan); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cyan); }
+    .btn-buy-nav { background: var(--cyan); color: #000; border: none; padding: 0.6rem 1.3rem; border-radius: 9999px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+    .btn-buy-nav:hover { box-shadow: 0 0 25px var(--cyan-glow); }
+
+    /* Hero */
+    .hero { max-width: 1200px; margin: 0 auto; padding: 4.5rem 2rem 3rem; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.3); color: var(--cyan); padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; margin-bottom: 1.25rem; font-family: var(--font-mono); }
+    .hero h1 { font-family: var(--font-heading); font-size: 3.6rem; font-weight: 700; line-height: 1.15; margin-bottom: 1.25rem; }
+    .hero h1 span { background: linear-gradient(135deg, #00f0ff, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--text-muted); font-size: 1.15rem; max-width: 620px; margin: 0 auto 2.5rem; }
+
+    /* Sound Mode Studio Controller */
+    .studio-console { max-width: 1000px; margin: 0 auto 4rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; box-shadow: 0 25px 60px rgba(0,0,0,0.7); }
+    .console-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    .console-title { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
+    .mode-buttons { display: flex; gap: 0.5rem; }
+    .mode-btn { background: #181b24; border: 1px solid var(--border); color: var(--text-muted); padding: 0.5rem 1.1rem; border-radius: 8px; font-size: 0.82rem; font-family: var(--font-mono); cursor: pointer; transition: all 0.2s; }
+    .mode-btn.active { background: var(--cyan); color: #000; border-color: var(--cyan); font-weight: 700; }
+
+    /* Canvas Equalizer */
+    .canvas-box { width: 100%; height: 160px; background: #06070a; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1.5rem; overflow: hidden; position: relative; }
+    canvas { width: 100%; height: 100%; display: block; }
+
+    .console-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+    .spec-item { text-align: center; }
+    .spec-val { font-family: var(--font-mono); font-size: 1.3rem; font-weight: 700; color: var(--cyan); margin-bottom: 0.25rem; }
+    .spec-lbl { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Product Showcase */
+    .prod-section { max-width: 1100px; margin: 0 auto 5rem; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .prod-visual-stage { background: linear-gradient(135deg, #131722, #0d0f17); border: 1px solid var(--border); border-radius: 20px; height: 380px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .prod-icon { font-size: 7rem; filter: drop-shadow(0 0 35px var(--cyan-glow)); }
+    .prod-details h2 { font-family: var(--font-heading); font-size: 2.4rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .prod-price-tag { font-family: var(--font-mono); font-size: 2rem; color: var(--cyan); font-weight: 700; margin-bottom: 1.25rem; }
+    .prod-specs-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.95rem; }
+    .prod-specs-list span { color: white; font-weight: 600; }
+    .btn-buy-large { background: var(--cyan); color: #000; border: none; padding: 1rem 2.5rem; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-buy-large:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--cyan-glow); }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.4rem; }
+      .prod-section { grid-template-columns: 1fr; }
+      .console-stats { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-wrap">
+      <a href="#" class="logo">
+        <span class="logo-wave">∿∿</span>
+        <div>Apex<span>Sonic</span> Audio</div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Planar Magnetic</a></li>
+        <li><a href="#">Tube DACs</a></li>
+        <li><a href="#">Studio Monitors</a></li>
+        <li><a href="#">Acoustic Specs</a></li>
+      </ul>
+      <button class="btn-buy-nav" onclick="alert('ApexSonic: Added Master Pro Planar to checkout cart!')">Order Now ($899)</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge">0.002% THD · 4Hz - 52,000Hz Ultra-Bandwidth</div>
+    <h1>Hear Everything.<br><span>Fabricated For Audio Purists.</span></h1>
+    <p>Hand-tuned planar drivers with aerospace-grade neodymium magnets delivering pristine sub-bass transient velocity and transparent harmonic staging.</p>
+  </section>
+
+  <!-- Interactive Studio Equalizer Console -->
+  <div class="studio-console">
+    <div class="console-top">
+      <div class="console-title">
+        <span style="color: var(--cyan);">🎛</span>
+        <span>Acoustic Frequency Profile Stage</span>
+      </div>
+      <div class="mode-buttons">
+        <button class="mode-btn active" data-mode="flat">Studio Flat (0dB)</button>
+        <button class="mode-btn" data-mode="bass">Bass Velocity (+5dB)</button>
+        <button class="mode-btn" data-mode="vocal">Vocal Presence</button>
+        <button class="mode-btn" data-mode="spatial">3D Holographic</button>
+      </div>
+    </div>
+
+    <div class="canvas-box">
+      <canvas id="eq-canvas"></canvas>
+    </div>
+
+    <div class="console-stats">
+      <div class="spec-item">
+        <div class="spec-val" id="spec-range">4Hz - 52kHz</div>
+        <div class="spec-lbl">Frequency Band</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-val" id="spec-thd">&lt; 0.002%</div>
+        <div class="spec-lbl">Total Harmonic Distortion</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-val" id="spec-imp">32 Ohms</div>
+        <div class="spec-lbl">Impedance</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-val" id="spec-spl">118 dB</div>
+        <div class="spec-lbl">Sensitivity (SPL)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flagship Product -->
+  <div class="prod-section">
+    <div class="prod-visual-stage">
+      <div class="prod-icon">🎧</div>
+    </div>
+    <div class="prod-details">
+      <h2>ApexPro Planar Reference</h2>
+      <div class="prod-price-tag">$899.00 USD</div>
+      <ul class="prod-specs-list">
+        <li>Driver: <span>106mm Ultra-Thin Planar Diaphragm</span></li>
+        <li>Cabling: <span>8-Core Silver-Plated Monocrystalline Copper</span></li>
+        <li>Chassis: <span>Aircraft CNC Aluminum + Italian Leather Pads</span></li>
+        <li>Crafted: <span>Individually Serialized & Frequency-Matched</span></li>
+      </ul>
+      <button class="btn-buy-large" onclick="alert('⚡ ApexSonic: Processing reservation for ApexPro Planar Reference. Priority shipping confirmed.')">
+        Order Now · In Stock (Ships Worldwide) →
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('eq-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let modeMultiplier = 1.0;
+    let speed = 0.05;
+
+    function resize() {
+      width = canvas.width = canvas.parentElement.offsetWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    let step = 0;
+    function drawEqualizer() {
+      ctx.clearRect(0, 0, width, height);
+      step += speed;
+
+      const barCount = 48;
+      const barWidth = width / barCount - 3;
+
+      for (let i = 0; i < barCount; i++) {
+        const x = i * (barWidth + 3);
+        const wave = Math.sin(step + i * 0.25) * 0.5 + 0.5;
+        const wave2 = Math.cos(step * 0.8 + i * 0.15) * 0.5 + 0.5;
+        const h = (wave * 0.6 + wave2 * 0.4) * height * 0.7 * modeMultiplier + 10;
+
+        const grad = ctx.createLinearGradient(0, height - h, 0, height);
+        grad.addColorStop(0, '#00f0ff');
+        grad.addColorStop(1, '#8b5cf6');
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(x, height - h, barWidth, h);
+      }
+
+      requestAnimationFrame(drawEqualizer);
+    }
+    drawEqualizer();
+
+    // Mode toggles
+    const modeBtns = document.querySelectorAll('.mode-btn');
+    modeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modeBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.getAttribute('data-mode');
+
+        if (mode === 'flat') {
+          modeMultiplier = 0.8;
+          speed = 0.04;
+        } else if (mode === 'bass') {
+          modeMultiplier = 1.25;
+          speed = 0.06;
+        } else if (mode === 'vocal') {
+          modeMultiplier = 1.0;
+          speed = 0.07;
+        } else {
+          modeMultiplier = 1.4;
+          speed = 0.09;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

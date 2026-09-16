@@ -1,0 +1,12 @@
+# Dependencies & IDE
+.vscode/
+.idea/
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Temporary files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexCare Dental Clinics | Modern Painless Dentistry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --primary-light: #ccfbf1;
+      --accent: #0284c7;
+      --dark: #0f172a;
+      --gray-light: #f8fafc;
+      --gray-border: #e2e8f0;
+      --text-muted: #64748b;
+      --radius: 12px;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: #fdfdfd; color: var(--dark); line-height: 1.6; }
+    
+    /* Header */
+    header { background: #ffffff; border-bottom: 1px solid var(--gray-border); position: sticky; top: 0; z-index: 100; }
+    .nav-wrap { max-width: 1180px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 0.6rem; font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--dark); text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; }
+    .logo span { color: var(--primary); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { display: flex; align-items: center; gap: 1rem; }
+    .phone-badge { font-weight: 700; color: var(--primary-dark); font-size: 0.9rem; text-decoration: none; display: flex; align-items: center; gap: 0.3rem; }
+    .btn-book { background: var(--primary); color: white; border: none; padding: 0.65rem 1.3rem; border-radius: 9999px; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .btn-book:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(13, 148, 136, 0.3); }
+
+    /* Hero */
+    .hero { max-width: 1180px; margin: 0 auto; padding: 4rem 1.5rem 3rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center; }
+    .pill { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--primary-light); color: var(--primary-dark); padding: 0.35rem 0.9rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1.25rem; }
+    .hero h1 { font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 800; line-height: 1.15; margin-bottom: 1.2rem; color: var(--dark); }
+    .hero h1 span { color: var(--primary); }
+    .hero p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; max-width: 520px; }
+    
+    /* Booking Card */
+    .booking-card { background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 20px 45px rgba(15, 23, 42, 0.1); border: 1px solid var(--gray-border); position: relative; }
+    .booking-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem; }
+    .form-row { margin-bottom: 1rem; }
+    .form-row label { display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-control { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-border); border-radius: 10px; font-size: 0.95rem; background: #fafafa; transition: border-color 0.2s; }
+    .form-control:focus { outline: none; border-color: var(--primary); background: white; }
+    .btn-submit-booking { width: 100%; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; border: none; padding: 0.9rem; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; margin-top: 0.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-submit-booking:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(13, 148, 136, 0.35); }
+
+    /* Trust Stats */
+    .stats-bar { max-width: 1180px; margin: 1rem auto 4rem; padding: 1.5rem; background: white; border-radius: 16px; border: 1px solid var(--gray-border); display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center; }
+    .stat-val { font-size: 2rem; font-weight: 800; font-family: 'Outfit', sans-serif; color: var(--primary); }
+    .stat-lbl { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+
+    /* Services */
+    .section { max-width: 1180px; margin: 0 auto; padding: 3rem 1.5rem; }
+    .sec-header { text-align: center; margin-bottom: 3rem; }
+    .sec-header h2 { font-size: 2.2rem; font-family: 'Outfit', sans-serif; font-weight: 800; margin-bottom: 0.5rem; }
+    .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .svc-card { background: white; border: 1px solid var(--gray-border); padding: 1.75rem; border-radius: 16px; transition: transform 0.2s, box-shadow 0.2s; }
+    .svc-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--primary-light); }
+    .svc-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1rem; }
+    .svc-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .svc-price { font-size: 0.9rem; font-weight: 700; color: var(--primary); margin-top: 0.75rem; }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: #0f172a; color: white; padding: 1rem 1.5rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); display: none; align-items: center; gap: 0.75rem; z-index: 1000; animation: slideIn 0.3s forwards; }
+    @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding-top: 2rem; }
+      .nav-links { display: none; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-wrap">
+      <a href="#" class="logo">
+        <div class="logo-icon">🦷</div>
+        <div>Apex<span>Care</span> Dental</div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Treatments</a></li>
+        <li><a href="#about">About Doctors</a></li>
+        <li><a href="#reviews">Patient Stories</a></li>
+        <li><a href="#pricing">Transparent Fees</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="tel:18004502739" class="phone-badge">📞 (800) 450-APEX</a>
+        <a href="#book" class="btn-book">Book Online</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="pill">✨ Awarded Best Regional Practice 2026</div>
+      <h1>Painless Dentistry Engineered For <span>Confident Smiles.</span></h1>
+      <p>Experience ultra-modern gentle dental care with 3D digital smile mapping, zero-anxiety sedation options, and guaranteed same-day emergency appointments.</p>
+      
+      <div style="display: flex; gap: 1.5rem; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 0.4rem; font-weight: 700;">
+          <span style="color: #f59e0b;">★★★★★</span>
+          <span>4.9/5 on Google (520+ Reviews)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Appointment Widget -->
+    <div class="booking-card" id="book">
+      <h3>📅 Reserve Your Consultation</h3>
+      <form id="clinic-booking-form">
+        <div class="form-row">
+          <label>Select Treatment</label>
+          <select class="form-control" id="treatment-select" required>
+            <option value="Complete Checkup & Digital 3D Scan ($99)">Complete Checkup & 3D Scan ($99)</option>
+            <option value="Laser Teeth Whitening ($299)">Laser Teeth Whitening ($299)</option>
+            <option value="Invisalign Clear Aligners Consultation (Free)">Invisalign Consultation (Free)</option>
+            <option value="Emergency Tooth Pain Relief (Same-Day)">Emergency Pain Relief (Same-Day)</option>
+            <option value="Porcelain Veneers Consultation">Porcelain Veneers Consultation</option>
+          </select>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+          <div class="form-row">
+            <label>Preferred Date</label>
+            <input type="date" class="form-control" id="book-date" required>
+          </div>
+          <div class="form-row">
+            <label>Preferred Time</label>
+            <select class="form-control" id="book-time">
+              <option>09:00 AM - Morning</option>
+              <option>11:30 AM - Morning</option>
+              <option>02:00 PM - Afternoon</option>
+              <option>04:30 PM - Evening</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Patient Full Name</label>
+          <input type="text" class="form-control" placeholder="e.g. Jessica Miller" id="patient-name" required>
+        </div>
+
+        <div class="form-row">
+          <label>Mobile Number</label>
+          <input type="tel" class="form-control" placeholder="(555) 000-1234" id="patient-phone" required>
+        </div>
+
+        <button type="submit" class="btn-submit-booking">Confirm Booking & Get SMS Pass →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <div class="stats-bar">
+    <div>
+      <div class="stat-val">18,500+</div>
+      <div class="stat-lbl">Smiles Restored</div>
+    </div>
+    <div>
+      <div class="stat-val">99.4%</div>
+      <div class="stat-lbl">Pain-Free Patient Score</div>
+    </div>
+    <div>
+      <div class="stat-val">15 Mins</div>
+      <div class="stat-lbl">Avg. Wait Time Guarantee</div>
+    </div>
+    <div>
+      <div class="stat-val">100%</div>
+      <div class="stat-lbl">Insurance Direct Billing</div>
+    </div>
+  </div>
+
+  <!-- Services Grid -->
+  <section class="section" id="services">
+    <div class="sec-header">
+      <h2>Comprehensive Modern Dental Services</h2>
+      <p style="color: var(--text-muted);">From preventive care to high-end cosmetic smile makeovers.</p>
+    </div>
+
+    <div class="service-grid">
+      <div class="svc-card">
+        <div class="svc-icon">✨</div>
+        <div class="svc-title">Laser Teeth Whitening</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Lift up to 8 shades in a single 45-minute painless session with Philips Zoom laser technology.</p>
+        <div class="svc-price">From $299 · 45 Mins</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">💎</div>
+        <div class="svc-title">Invisalign Aligners</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Discreet, comfortable orthodontic teeth straightening with custom 3D printed clear aligners.</p>
+        <div class="svc-price">Flexible 0% APR Financing</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🛡️</div>
+        <div class="svc-title">Same-Day Emergency</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Chipped tooth, intense root pain or lost crown? Our emergency team sees you within 60 minutes.</p>
+        <div class="svc-price">Priority Same-Day Access</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔍</div>
+        <div class="svc-title">3D Cone-Beam Scans</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Low-radiation digital radiography for accurate implant planning and nerve detection.</p>
+        <div class="svc-price">Included with Comprehensive Exam</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="clinic-toast">
+    <span style="font-size: 1.5rem;">🎉</span>
+    <div>
+      <strong id="toast-title">Appointment Confirmed!</strong>
+      <div style="font-size: 0.85rem; color: #94a3b8;" id="toast-desc">Confirmation SMS sent with calendar invite.</div>
+    </div>
+  </div>
+
+  <script>
+    // Set tomorrow as default booking date
+    const dateInput = document.getElementById('book-date');
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateInput.value = tomorrow.toISOString().split('T')[0];
+    dateInput.min = tomorrow.toISOString().split('T')[0];
+
+    // Interactive booking submission
+    document.getElementById('clinic-booking-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const patient = document.getElementById('patient-name').value;
+      const treatment = document.getElementById('treatment-select').value;
+      const date = document.getElementById('book-date').value;
+      const time = document.getElementById('book-time').value;
+
+      const toast = document.getElementById('clinic-toast');
+      document.getElementById('toast-title').textContent = `Appointment Confirmed for ${patient}!`;
+      document.getElementById('toast-desc').textContent = `${treatment} on ${date} at ${time}. SMS details sent.`;
+      
+      toast.style.display = 'flex';
+      setTimeout(() => { toast.style.display = 'none'; }, 4500);
+      e.target.reset();
+      dateInput.value = tomorrow.toISOString().split('T')[0];
+    });
+  </script>
+</body>
+</html>

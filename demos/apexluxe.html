@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexLuxe Apparel | Luxury Haute Couture & Ready-to-Wear</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d0f;
+      --bg-card: #151518;
+      --gold: #d4af37;
+      --gold-light: #f5e6a8;
+      --text: #f3f3f5;
+      --text-muted: #8e8e93;
+      --border: rgba(255, 255, 255, 0.1);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-sans); line-height: 1.5; overflow-x: hidden; }
+
+    /* Announcement */
+    .top-bar { background: #1a1a1e; border-bottom: 1px solid var(--border); padding: 0.5rem 1.5rem; text-align: center; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+
+    /* Header */
+    header { border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(13, 13, 15, 0.95); backdrop-filter: blur(12px); z-index: 50; }
+    .nav-wrap { max-width: 1200px; margin: 0 auto; padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; letter-spacing: 0.12em; color: var(--text); text-decoration: none; text-transform: uppercase; }
+    .logo span { color: var(--gold); font-style: italic; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text); text-decoration: none; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .cart-btn { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.5rem 1.1rem; border-radius: 9999px; cursor: pointer; display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; }
+    .cart-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .cart-badge { background: var(--gold); color: #000; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; }
+
+    /* Hero */
+    .hero { max-width: 1200px; margin: 0 auto; padding: 4.5rem 2rem 3rem; text-align: center; }
+    .hero-sub { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--gold); margin-bottom: 1rem; }
+    .hero h1 { font-family: var(--font-serif); font-size: 3.8rem; font-weight: 500; letter-spacing: 0.04em; line-height: 1.1; margin-bottom: 1.2rem; }
+    .hero p { color: var(--text-muted); font-size: 1.05rem; max-width: 580px; margin: 0 auto 2.5rem; }
+    .btn-hero { display: inline-block; background: var(--gold); color: #000; padding: 0.9rem 2.2rem; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: all 0.2s; }
+    .btn-hero:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25); }
+
+    /* Products Grid */
+    .section { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .section-title { font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+    .prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
+    .prod-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform 0.25s, border-color 0.25s; display: flex; flex-direction: column; }
+    .prod-card:hover { transform: translateY(-6px); border-color: rgba(212, 175, 55, 0.4); }
+    .prod-visual { height: 280px; background: linear-gradient(135deg, #24242a, #1a1a20); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding: 1.5rem; }
+    .prod-visual-icon { font-size: 4rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); transition: transform 0.3s; }
+    .prod-card:hover .prod-visual-icon { transform: scale(1.1); }
+    .prod-tag { position: absolute; top: 1rem; left: 1rem; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); border: 1px solid var(--border); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.6rem; border-radius: 4px; color: var(--gold); }
+    .prod-body { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
+    .prod-title { font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 0.4rem; }
+    .prod-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .prod-footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; }
+    .prod-price { font-size: 1.2rem; font-weight: 700; color: var(--gold); font-family: var(--font-serif); }
+    .btn-add { background: #222228; border: 1px solid var(--border); color: var(--text); padding: 0.55rem 1rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-add:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+
+    /* Slide-out Cart Drawer */
+    .cart-drawer-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px); z-index: 200; display: none; }
+    .cart-drawer-backdrop.open { display: block; }
+    .cart-drawer { position: fixed; top: 0; right: 0; width: 380px; max-width: 90vw; height: 100%; background: #121216; border-left: 1px solid var(--border); z-index: 201; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; padding: 1.75rem; }
+    .cart-drawer.open { transform: translateX(0); }
+    .cart-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+    .cart-header h3 { font-family: var(--font-serif); font-size: 1.5rem; }
+    .btn-close-cart { background: transparent; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
+    .cart-items { flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; }
+    .cart-item { display: flex; gap: 1rem; align-items: center; background: #18181e; padding: 0.9rem; border-radius: 8px; border: 1px solid var(--border); }
+    .cart-item-emoji { font-size: 2rem; background: #22222a; border-radius: 6px; padding: 0.4rem; }
+    .cart-item-info { flex-grow: 1; }
+    .cart-item-title { font-size: 0.95rem; font-weight: 600; }
+    .cart-item-price { font-size: 0.85rem; color: var(--gold); }
+    .cart-footer { border-top: 1px solid var(--border); padding-top: 1.25rem; margin-top: 1rem; }
+    .cart-subtotal { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; margin-bottom: 1.25rem; }
+    .btn-checkout { width: 100%; background: var(--gold); color: #000; border: none; padding: 1rem; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
+    .btn-checkout:hover { background: var(--gold-light); }
+
+    /* Toast */
+    .toast-bag { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: #1a1a20; border: 1px solid var(--gold); color: var(--text); padding: 0.8rem 1.5rem; border-radius: 9999px; display: none; align-items: center; gap: 0.75rem; z-index: 300; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.6rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">Complimentary Global Express Courier on All Orders Over $200 · Currency: USD</div>
+
+  <header>
+    <div class="nav-wrap">
+      <a href="#" class="logo">Apex<span>Luxe</span></a>
+      <ul class="nav-links">
+        <li><a href="#">Capsule 2026</a></li>
+        <li><a href="#">Ready-To-Wear</a></li>
+        <li><a href="#">Outerwear</a></li>
+        <li><a href="#">Accessories</a></li>
+        <li><a href="#">Atelier</a></li>
+      </ul>
+      <button class="cart-btn" id="open-cart-btn">
+        <span>Shopping Bag</span>
+        <span class="cart-badge" id="cart-counter">0</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-sub">Haute Couture Autumn / Winter Collection</div>
+    <h1>Understated Elegance.<br>Timeless Tailoring.</h1>
+    <p>Handcrafted in limited editions using pure Italian mulberry silks, double-faced Mongolian cashmere, and precision architectural draping.</p>
+    <a href="#collection" class="btn-hero">Explore The Capsule →</a>
+  </section>
+
+  <section class="section" id="collection">
+    <div class="section-title">
+      <span>Curated Capsule Releases</span>
+      <span style="font-size: 0.9rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--font-sans);">Limited Edition (100 Pieces Worldwide)</span>
+    </div>
+
+    <div class="prod-grid">
+      <!-- Product 1 -->
+      <div class="prod-card">
+        <div class="prod-visual">
+          <span class="prod-tag">Signature Trench</span>
+          <div class="prod-visual-icon">🧥</div>
+        </div>
+        <div class="prod-body">
+          <h3 class="prod-title">The Sovereign Silk Trench</h3>
+          <p class="prod-desc">Double-breasted storm-shield trench woven with waterproofed raw mulberry silk twill.</p>
+          <div class="prod-footer">
+            <span class="prod-price">$780</span>
+            <button class="btn-add" data-title="Sovereign Silk Trench" data-price="780" data-emoji="🧥">+ Add to Bag</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="prod-card">
+        <div class="prod-visual">
+          <span class="prod-tag">Mongolian Cashmere</span>
+          <div class="prod-visual-icon">🧶</div>
+        </div>
+        <div class="prod-body">
+          <h3 class="prod-title">Kashan Ribbed Turtleneck</h3>
+          <p class="prod-desc">Ultra-soft 4-ply grade-A cashmere with seamless Japanese knit architectural cuffs.</p>
+          <div class="prod-footer">
+            <span class="prod-price">$420</span>
+            <button class="btn-add" data-title="Kashan Ribbed Turtleneck" data-price="420" data-emoji="🧶">+ Add to Bag</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="prod-card">
+        <div class="prod-visual">
+          <span class="prod-tag">Italian Wool</span>
+          <div class="prod-visual-icon">👔</div>
+        </div>
+        <div class="prod-body">
+          <h3 class="prod-title">Palermo Tailored Blazer</h3>
+          <p class="prod-desc">Half-canvas construction in super 140s virgin merino wool with horn buttons.</p>
+          <div class="prod-footer">
+            <span class="prod-price">$690</span>
+            <button class="btn-add" data-title="Palermo Tailored Blazer" data-price="690" data-emoji="👔">+ Add to Bag</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="prod-card">
+        <div class="prod-visual">
+          <span class="prod-tag">Florentine Leather</span>
+          <div class="prod-visual-icon">👜</div>
+        </div>
+        <div class="prod-body">
+          <h3 class="prod-title">Atelier No. 4 Tote Bag</h3>
+          <p class="prod-desc">Full-grain vegetable-tanned calfskin with gold hardware and suede-lined compartment.</p>
+          <div class="prod-footer">
+            <span class="prod-price">$540</span>
+            <button class="btn-add" data-title="Atelier No. 4 Tote Bag" data-price="540" data-emoji="👜">+ Add to Bag</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide-out Cart Drawer -->
+  <div class="cart-drawer-backdrop" id="cart-backdrop"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>Your Shopping Bag</h3>
+      <button class="btn-close-cart" id="close-cart-btn">&times;</button>
+    </div>
+    <div class="cart-items" id="cart-items-list">
+      <div style="text-align: center; color: var(--text-muted); margin-top: 3rem;">Your bag is currently empty.</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-subtotal">
+        <span>Estimated Total</span>
+        <span id="cart-total-val">$0</span>
+      </div>
+      <button class="btn-checkout" id="checkout-btn">Proceed to VIP Checkout →</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-bag" id="toast-bag">
+    <span>✨</span>
+    <span id="toast-bag-msg">Item added to your shopping bag!</span>
+  </div>
+
+  <script>
+    const bag = [];
+    const cartCounter = document.getElementById('cart-counter');
+    const cartDrawer = document.getElementById('cart-drawer');
+    const cartBackdrop = document.getElementById('cart-backdrop');
+    const cartItemsList = document.getElementById('cart-items-list');
+    const cartTotalVal = document.getElementById('cart-total-val');
+    const toastBag = document.getElementById('toast-bag');
+
+    function updateCart() {
+      cartCounter.textContent = bag.length;
+      if (bag.length === 0) {
+        cartItemsList.innerHTML = '<div style="text-align: center; color: var(--text-muted); margin-top: 3rem;">Your bag is currently empty.</div>';
+        cartTotalVal.textContent = '$0';
+        return;
+      }
+
+      let subtotal = 0;
+      cartItemsList.innerHTML = bag.map((item, idx) => {
+        subtotal += item.price;
+        return `
+          <div class="cart-item">
+            <div class="cart-item-emoji">${item.emoji}</div>
+            <div class="cart-item-info">
+              <div class="cart-item-title">${item.title}</div>
+              <div class="cart-item-price">$${item.price.toLocaleString()}</div>
+            </div>
+            <button onclick="removeItem(${idx})" style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:1.1rem;" title="Remove">&times;</button>
+          </div>
+        `;
+      }).join('');
+
+      cartTotalVal.textContent = `$${subtotal.toLocaleString()}`;
+    }
+
+    window.removeItem = function(index) {
+      bag.splice(index, 1);
+      updateCart();
+    };
+
+    document.querySelectorAll('.btn-add').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const title = btn.getAttribute('data-title');
+        const price = parseInt(btn.getAttribute('data-price'));
+        const emoji = btn.getAttribute('data-emoji');
+        bag.push({ title, price, emoji });
+        updateCart();
+
+        document.getElementById('toast-bag-msg').textContent = `Added "${title}" to your bag!`;
+        toastBag.style.display = 'flex';
+        setTimeout(() => { toastBag.style.display = 'none'; }, 3000);
+      });
+    });
+
+    document.getElementById('open-cart-btn').addEventListener('click', () => {
+      cartDrawer.classList.add('open');
+      cartBackdrop.classList.add('open');
+    });
+
+    const closeCart = () => {
+      cartDrawer.classList.remove('open');
+      cartBackdrop.classList.remove('open');
+    };
+
+    document.getElementById('close-cart-btn').addEventListener('click', closeCart);
+    cartBackdrop.addEventListener('click', closeCart);
+
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+      if (bag.length === 0) return;
+      alert(`🎉 Thank you for testing the ApexLuxe Apparel demo! Order total: ${cartTotalVal.textContent}`);
+      bag.length = 0;
+      updateCart();
+      closeCart();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexFinova Analytics | Enterprise Cloud Financial Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090a12;
+      --bg-card: #101221;
+      --bg-card-hover: #171a30;
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.4);
+      --cyan: #06b6d4;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --text: #f8fafc;
+      --text-muted: #64748b;
+      --border: rgba(255, 255, 255, 0.08);
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.5; }
+
+    /* Top Ticker */
+    .status-bar { background: #0e101d; border-bottom: 1px solid var(--border); padding: 0.45rem 1.5rem; display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); }
+    .status-indicator { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--emerald); font-weight: 600; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* Header */
+    header { background: rgba(9, 10, 18, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-wrap { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 0.6rem; font-size: 1.35rem; font-weight: 800; color: white; text-decoration: none; }
+    .logo-badge { width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(135deg, var(--primary), var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .logo span { color: var(--cyan); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
+    .nav-links a:hover { color: white; }
+    .nav-actions { display: flex; gap: 1rem; align-items: center; }
+    .btn-login { color: #cbd5e1; text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+    .btn-trial { background: var(--primary); color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 8px; font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: all 0.2s; }
+    .btn-trial:hover { background: #4f46e5; box-shadow: 0 0 20px var(--primary-glow); }
+
+    /* Hero */
+    .hero { max-width: 1200px; margin: 0 auto; padding: 3.5rem 1.5rem 2rem; text-align: center; }
+    .hero-pill { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); color: #a5b4fc; padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 700; margin-bottom: 1.25rem; }
+    .hero h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.15; margin-bottom: 1.25rem; }
+    .hero h1 span { background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--text-muted); font-size: 1.15rem; max-width: 650px; margin: 0 auto 2.5rem; }
+
+    /* Interactive Live Dashboard Stage */
+    .dash-frame { max-width: 1100px; margin: 0 auto 4rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 25px 60px rgba(0,0,0,0.5); overflow: hidden; }
+    .dash-header { background: #131628; padding: 0.9rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .dash-tabs { display: flex; gap: 0.5rem; }
+    .dash-tab { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 0.4rem 0.9rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .dash-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* KPIs */
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+    .kpi-cell { background: var(--bg-card); padding: 1.5rem; }
+    .kpi-label { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+    .kpi-value { font-size: 1.8rem; font-weight: 800; font-family: var(--font-mono); margin-bottom: 0.4rem; }
+    .kpi-growth { font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 0.3rem; }
+    .kpi-growth.up { color: var(--emerald); }
+    .kpi-growth.down { color: var(--rose); }
+
+    /* Chart Canvas Area */
+    .chart-container { padding: 2rem; background: #0c0e1a; position: relative; }
+    .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .chart-title { font-size: 1.1rem; font-weight: 700; }
+    .chart-svg { width: 100%; height: 220px; overflow: visible; }
+
+    /* Feed */
+    .feed-container { border-top: 1px solid var(--border); padding: 1.25rem 2rem; background: var(--bg-card); }
+    .feed-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+    .feed-items { display: flex; flex-direction: column; gap: 0.5rem; }
+    .feed-row { display: flex; justify-content: space-between; font-size: 0.85rem; font-family: var(--font-mono); padding: 0.4rem 0.6rem; background: rgba(255,255,255,0.02); border-radius: 4px; }
+    .feed-amount { color: var(--emerald); font-weight: 700; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="status-bar">
+    <div class="status-indicator">
+      <span class="status-dot"></span>
+      <span>ApexFinova Cloud Cluster: 100% Operational (Latency 14ms)</span>
+    </div>
+    <div>SOC-2 Type II Certified · Real-Time ISO-27001 Edge Sync</div>
+  </div>
+
+  <header>
+    <div class="nav-wrap">
+      <a href="#" class="logo">
+        <div class="logo-badge">⚡</div>
+        <div>Apex<span>Finova</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Platform</a></li>
+        <li><a href="#">Integrations</a></li>
+        <li><a href="#">Forecast Models</a></li>
+        <li><a href="#">Enterprise SLA</a></li>
+        <li><a href="#">Pricing</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="btn-login">Sign In</a>
+        <button class="btn-trial" id="trial-btn">Start Free Trial →</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-pill">🚀 Next-Gen Financial Intelligence Engine</div>
+    <h1>Turn Raw Balance Sheets Into<br><span>Automated Growth Forecasts.</span></h1>
+    <p>Consolidate Stripe, QuickBooks, NetSuite, and multi-currency banking in one unified predictive dashboard with automated churn and burn forecasting.</p>
+  </section>
+
+  <!-- Live Interactive Dashboard -->
+  <div class="dash-frame">
+    <div class="dash-header">
+      <div style="font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+        <span>📊 ApexFinova Command Console</span>
+        <span style="font-size: 0.75rem; background: rgba(16, 185, 129, 0.2); color: var(--emerald); padding: 0.2rem 0.5rem; border-radius: 4px;">LIVE PROD</span>
+      </div>
+      <div class="dash-tabs">
+        <button class="dash-tab" data-range="7d">7 Days</button>
+        <button class="dash-tab active" data-range="30d">30 Days</button>
+        <button class="dash-tab" data-range="90d">90 Days</button>
+        <button class="dash-tab" data-range="1y">1 Year</button>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi-cell">
+        <div class="kpi-label">Monthly Recurring Revenue</div>
+        <div class="kpi-value" id="kpi-mrr">$142,580</div>
+        <div class="kpi-growth up">▲ +18.4% vs last period</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-label">Net Revenue Retention</div>
+        <div class="kpi-value" id="kpi-nrr">124.6%</div>
+        <div class="kpi-growth up">▲ +4.2% expansion tier</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-label">Customer Churn Rate</div>
+        <div class="kpi-value" id="kpi-churn">0.38%</div>
+        <div class="kpi-growth up">▼ -0.15% all-time record</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-label">Cash Runway</div>
+        <div class="kpi-value" id="kpi-runway">38.4 Mo</div>
+        <div class="kpi-growth up">● Zero capital risk</div>
+      </div>
+    </div>
+
+    <!-- Interactive Graph -->
+    <div class="chart-container">
+      <div class="chart-header">
+        <div class="chart-title">Revenue Trajectory & Anomaly Detection</div>
+        <div style="font-size: 0.85rem; color: var(--cyan); font-family: var(--font-mono);" id="chart-stat">ARR Run-Rate: $1.71M</div>
+      </div>
+
+      <svg class="chart-svg" viewBox="0 0 800 200">
+        <defs>
+          <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6366f1" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#6366f1" stop-opacity="0.0"/>
+          </linearGradient>
+        </defs>
+        <!-- Gridlines -->
+        <line x1="0" y1="50" x2="800" y2="50" stroke="rgba(255,255,255,0.05)"/>
+        <line x1="0" y1="100" x2="800" y2="100" stroke="rgba(255,255,255,0.05)"/>
+        <line x1="0" y1="150" x2="800" y2="150" stroke="rgba(255,255,255,0.05)"/>
+        
+        <!-- Area -->
+        <polygon id="chart-area" points="0,170 120,150 240,130 360,140 480,100 600,70 720,50 800,30 800,200 0,200" fill="url(#chart-grad)"/>
+        <!-- Line -->
+        <polyline id="chart-line" points="0,170 120,150 240,130 360,140 480,100 600,70 720,50 800,30" fill="none" stroke="#6366f1" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <!-- Live Event Feed -->
+    <div class="feed-container">
+      <div class="feed-title">Live Cloud Financial Telemetry</div>
+      <div class="feed-items" id="feed-items">
+        <div class="feed-row">
+          <span>[STRIPE WEBHOOK] Enterprise Annual Renewal (Acme Corp)</span>
+          <span class="feed-amount">+$36,000.00</span>
+        </div>
+        <div class="feed-row">
+          <span>[NETSUITE] Multi-Entity VAT Tax Optimization Passed</span>
+          <span style="color: var(--cyan);">VALIDATED</span>
+        </div>
+        <div class="feed-row">
+          <span>[BANK FEED] Treasury Yield Auto-Reinvested</span>
+          <span class="feed-amount">+$1,420.50</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const dataRanges = {
+      '7d': { mrr: '$139,200', nrr: '122.1%', churn: '0.41%', runway: '37.8 Mo', stat: '7-Day ARR Velocity: +$14.2K', points: '0,180 120,165 240,155 360,150 480,130 600,110 720,95 800,80' },
+      '30d': { mrr: '$142,580', nrr: '124.6%', churn: '0.38%', runway: '38.4 Mo', stat: '30-Day Run-Rate: $1.71M', points: '0,170 120,150 240,130 360,140 480,100 600,70 720,50 800,30' },
+      '90d': { mrr: '$158,900', nrr: '128.0%', churn: '0.32%', runway: '41.2 Mo', stat: 'Quarterly Growth: +38.5%', points: '0,190 120,160 240,140 360,110 480,85 600,60 720,35 800,15' },
+      '1y': { mrr: '$210,400', nrr: '136.2%', churn: '0.24%', runway: '52.0 Mo', stat: 'Annual Forecast: $2.52M ARR', points: '0,195 120,170 240,135 360,95 480,65 600,40 720,20 800,10' }
+    };
+
+    const tabs = document.querySelectorAll('.dash-tab');
+    const chartLine = document.getElementById('chart-line');
+    const chartArea = document.getElementById('chart-area');
+    const kpiMrr = document.getElementById('kpi-mrr');
+    const kpiNrr = document.getElementById('kpi-nrr');
+    const kpiChurn = document.getElementById('kpi-churn');
+    const kpiRunway = document.getElementById('kpi-runway');
+    const chartStat = document.getElementById('chart-stat');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const range = tab.getAttribute('data-range');
+        const d = dataRanges[range];
+
+        kpiMrr.textContent = d.mrr;
+        kpiNrr.textContent = d.nrr;
+        kpiChurn.textContent = d.churn;
+        kpiRunway.textContent = d.runway;
+        chartStat.textContent = d.stat;
+
+        chartLine.setAttribute('points', d.points);
+        chartArea.setAttribute('points', `${d.points} 800,200 0,200`);
+      });
+    });
+
+    document.getElementById('trial-btn').addEventListener('click', () => {
+      alert('⚡ ApexFinova Demo Sandbox Trial: Access Granted! Connecting demo cluster with mock Stripe data...');
+    });
+  </script>
+</body>
+</html>
