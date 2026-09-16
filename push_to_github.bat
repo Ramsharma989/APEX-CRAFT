@@ -1,70 +1,55 @@
 @echo off
-setlocal
-set "PATH=%LOCALAPPDATA%\Programs\MinGit\cmd;%PATH%"
-title ApexCraft Studios - Deploy to GitHub
+setlocal EnableDelayedExpansion
+set "PATH=%LOCALAPPDATA%\Programs\MinGit\cmd;%LOCALAPPDATA%\Programs\MinGit\mingw64\bin;%PATH%"
+title ApexCraft Studios - Push to GitHub
 
 echo ===================================================================
-echo               ApexCraft Studios - GitHub Deployment
+echo               ApexCraft Studios - Push to GitHub
 echo ===================================================================
 echo.
-
-git remote get-url origin >nul 2>&1
-if %ERRORLEVEL% EQU 0 (
-    for /f "tokens=*" %%i in ('git remote get-url origin') do set CURRENT_REMOTE=%%i
-    echo Current GitHub Remote: %CURRENT_REMOTE%
-    echo.
-    set /p CHOICE="Do you want to push updates to this existing remote? (y/n, default: y): "
-    if /i "%CHOICE%"=="n" goto prompt_new
-    goto push_now
-)
-
-:prompt_new
-echo Please create a new public repository on GitHub (https://github.com/new).
-echo (Leave it empty: do NOT check README, .gitignore, or license)
+echo Target Repository: https://github.com/Ramsharma989/APEX-CRAFT.git
 echo.
-set /p REPO_URL="Enter your GitHub Repository URL (e.g. https://github.com/your-username/repo.git): "
-if "%REPO_URL%"=="" (
-    echo [ERROR] No repository URL was entered.
-    pause
-    exit /b 1
-)
 
 git remote remove origin >nul 2>&1
-git remote add origin %REPO_URL%
+git remote add origin https://github.com/Ramsharma989/APEX-CRAFT.git
 
-:push_now
-echo.
-echo [1/3] Adding any modified files...
+echo [1/3] Adding all files and creating commit...
 git add .
-git commit -m "Site update: ApexCraft Studios" >nul 2>&1
+git commit -m "Publish ApexCraft Studios & Demo Websites" >nul 2>&1
 
 echo [2/3] Setting branch to main...
 git branch -M main
 
-echo [3/3] Pushing code to GitHub...
-echo (A browser window may open to authenticate your GitHub account)
+echo [3/3] Pushing to GitHub...
+echo (If prompted, click 'Sign in with your browser' to authenticate)
 echo.
-git push -u origin main
+git push -u origin main --force
 
 if %ERRORLEVEL% EQU 0 (
     echo.
     echo ===================================================================
     echo                     SUCCESSFULLY PUSHED!
     echo ===================================================================
-    echo Next step to go LIVE on GitHub Pages:
-    echo 1. Open your repository on GitHub.
-    echo 2. Go to: Settings -> Pages (in the left sidebar)
-    echo 3. Under 'Build and deployment', set:
-    echo      - Source: Deploy from a branch
-    echo      - Branch: main
-    echo      - Folder: / (root)
-    echo 4. Click 'Save'.
-    echo In 1-2 minutes, your website will be live at:
-    echo   https://^<your-username^>.github.io/^<repo-name^>/
+    echo.
+    echo Your website files are now on GitHub!
+    echo.
+    echo NEXT STEP: Turn on GitHub Pages (takes 30 seconds):
+    echo 1. Open: https://github.com/Ramsharma989/APEX-CRAFT/settings/pages
+    echo 2. Under 'Build and deployment' -> 'Branch', select: main
+    echo 3. Folder: / (root)
+    echo 4. Click 'Save'
+    echo.
+    echo In ~60 seconds, your website will be LIVE at:
+    echo   https://Ramsharma989.github.io/APEX-CRAFT/
     echo ===================================================================
 ) else (
     echo.
-    echo [ERROR] Push failed. Please check your repository URL or permissions.
+    echo ===================================================================
+    echo [NOTE] If you saw an authentication error:
+    echo 1. Make sure you are logged into GitHub as 'Ramsharma989'.
+    echo 2. You can also generate a Personal Access Token at:
+    echo    https://github.com/settings/tokens
+    echo ===================================================================
 )
 
 echo.
